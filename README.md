@@ -40,6 +40,11 @@ If you want to change some settings:
 
 ```lua
 require('im_select').setup {
+	-- Which command should the plugin call for the executable im-select binary
+	-- By default, it will be set to "im-select.exe" automatically if you are using WSL
+	-- Just leave it default
+	default_command = "im-select"
+
 	-- IM will be set to `default_im_select` in `normal` mode(`EnterVim` or `InsertLeave`)
 	-- For Windows, default: "1003", aka: English US Keyboard
 	-- You can use `im-select` in cli to get the IM name of you preferred
