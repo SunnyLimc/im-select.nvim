@@ -39,24 +39,27 @@ M.setup = function(opts)
 	if auto_restore then
 		vim.api.nvim_create_autocmd({ "InsertEnter" }, {
 			callback = function()
-				local current_select = all_trim(vim.fn.system({ default_command }))
-				local save = vim.g["im_select_current_im_select"]
-
-				if current_select ~= save then
-					vim.fn.system({ default_command, save })
-				end
+				vim.defer_fn( function ()
+					local current_select = all_trim(vim.fn.system({ default_command }))
+					local save = vim.g["im_select_current_im_select"]
+					if current_select ~= save then
+						vim.fn.system({ default_command, save })
+					end
+				end, 0)
 			end,
 		})
 	end
 
 	vim.api.nvim_create_autocmd({ "InsertLeave", "VimEnter" }, {
 		callback = function()
+			vim.defer_fn( function ()
 			local current_select = all_trim(vim.fn.system({ default_command }))
-			vim.api.nvim_set_var("im_select_current_im_select", current_select)
-
-			if current_select ~= default_im_select then
-				vim.fn.system({ default_command, default_im_select })
-			end
+				vim.api.nvim_set_var("im_select_current_im_select", current_select)
+				if current_select ~= default_im_select then
+					vim.fn.system({ default_command, default_im_select })
+				end
+			end, 0
+		)
 		end,
 	})
 end
