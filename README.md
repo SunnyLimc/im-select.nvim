@@ -1,3 +1,7 @@
+# [DEPRECATED WARNING]
+
+### Weird behavior sometime encounted, you may run up against with data losing or line missing randomly, the fork has been stopped till I have a better workaround to fix this. 
+
 # im-select.nvim
 
 Switch Input Method automatically depends on Neovim's edit mode.
